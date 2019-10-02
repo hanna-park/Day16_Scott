@@ -24,6 +24,7 @@ public class SalController {
 				sdtoList=sdao.selectAll();
 				sv.view(sdtoList);
 				break;
+				
 			case 2:
 				
 				int num =si.salnoInput();
@@ -31,6 +32,7 @@ public class SalController {
 				sdto=sdao.selectOne(num);
 				sv.view(sdto);
 				break;
+				
 			case 3:
 				
 				System.out.println("추가");
