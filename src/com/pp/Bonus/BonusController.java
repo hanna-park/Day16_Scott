@@ -31,11 +31,14 @@ public class BonusController {
 				break;
 			
 			case 2 :
-		
+				
+				String name = bonin.bonnoInput();
+				BonusDTO bonusDTO = bonDAO.getselectOne(ename);
 				
 				break;
 			
 			case 3:
+				
 				 break;
 			
 			case 4:

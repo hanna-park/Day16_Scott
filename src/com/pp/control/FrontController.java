@@ -2,16 +2,20 @@ package com.pp.control;
 
 import java.util.Scanner;
 
+import com.pp.salgrade.SalController;
+
 public class FrontController {
 	
 	private Scanner sc;
 	private EmpController empController;
 	private DeptController deptController;
+	private SalController sal;
 	
 	public FrontController() {
 		sc = new Scanner(System.in);
 		empController = new EmpController();
 		deptController = new DeptController();
+		sal = new SalController();
 	}
 	
 	
@@ -23,7 +27,8 @@ public class FrontController {
 		while(check) {
 			System.out.println("1. 사원관리");
 			System.out.println("2. 부서관리");
-			System.out.println("3. 종료");
+			System.out.println("3. sal");
+			System.out.println("4. 종료");
 			select =sc.nextInt();
 			
 			switch(select) {
@@ -37,6 +42,9 @@ public class FrontController {
 				deptController.start();			
 				break;
 				
+			case 3:
+				sal.start();
+				break;
 			default:
 				check = !check;
 			}
