@@ -85,7 +85,54 @@ public class EmpDAO {
 	
 	
 	
-	
+	public List<EmpDTO> getSelectList2(String str){
+		Connection con = null;
+		PreparedStatement st= null;
+		ResultSet rs = null;
+		EmpDTO empDTO = null;
+		ArrayList<EmpDTO> ar = new ArrayList<EmpDTO>();
+		
+		try {
+			con = DBConnector.getConnect();
+			
+			String sql = "select * from emp where ename like '%"+str+"%'";
+			
+			st = con.prepareStatement(sql);
+			rs = st.executeQuery();
+			
+			while(rs.next()) {
+				empDTO = new EmpDTO();
+				empDTO.setEmpno(rs.getInt("empno"));
+				empDTO.setEname(rs.getString("ename"));
+				empDTO.setJob(rs.getString("job"));
+				empDTO.setMgr(rs.getInt("mgr"));
+				empDTO.setHiredate(rs.getDate("hiredate"));
+				empDTO.setSal(rs.getInt("sal"));
+				empDTO.setComm(rs.getInt("comm"));
+				empDTO.setDeptno(rs.getInt("deptno"));
+				ar.add(empDTO);
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				st.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return ar;
+		
+		
+	}
 	
 	//getSelectList
 		//전체사원정보 - 최신입사일순

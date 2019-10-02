@@ -19,7 +19,7 @@ public class BonusController {
 			System.out.println("2. 보너스 검색 출력");
 			System.out.println("3. 보너스 정보 추가");
 			System.out.println("4. 보너스 정보 삭제");
-			System.out.println("5. 종료");
+			System.out.println("6. 종료");
 			
 			int num = sc.nextInt();
 			

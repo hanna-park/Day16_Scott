@@ -41,6 +41,12 @@ public class EmpInput {
 		return empDTO;
 	}
 	
+	public String empnoInput2() {
+		System.out.println("사원 글자하나");
+		String name = sc.next();
+		return name;
+	}
+	
 	//empnoInput
 	//사원번호를 입력하세요
 	public int empnoInput() {

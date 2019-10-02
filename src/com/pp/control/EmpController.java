@@ -28,7 +28,8 @@ public class EmpController {
 			System.out.println("1. 사원 전체 정보");
 			System.out.println("2. 사원 검색 출력");
 			System.out.println("3. 사원 정보 추가");
-			System.out.println("4. 종료");
+			System.out.println("4. 사원 정보 검색 한글자만 입력");
+			System.out.println("5. 종료");
 			
 			int num = sc.nextInt();
 
@@ -58,6 +59,12 @@ public class EmpController {
 					EmpDTO empDTO = in.insert();
 					num = emp.insert(empDTO);
 					
+					break;
+				case 4:
+					
+					String n = in.empnoInput2();
+					ar = emp.getSelectList2(n);
+					ev.view(ar);
 					break;
 				default:				
 					check= !check;
