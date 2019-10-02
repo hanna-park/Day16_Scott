@@ -5,14 +5,91 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.pp.util.DBConnector;
 
 public class EmpDAO {
 	
+	//delete
+	public void delete(EmpDTO empDTO) {
+		Connection con = null;
+		PreparedStatement st = null;
+		int result = 0;
+		
+		try {
+			con =DBConnector.getConnect();
+			String sql = "delete emp where empno=?";
+			
+			st = con.prepareStatement(sql);
+			
+			st.setInt(1, empDTO.getEmpno());
+			
+			result = st.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	
+	
+	//insert
+	public int insert(EmpDTO empDTO) {
+		Connection con = null;
+		PreparedStatement st = null;
+		int result = 0;
+		try {
+			con = DBConnector.getConnect();
+			
+			String sql = "insert into emp values(?,?,?,?,sysdate,?,?,?)";
+			
+			st = con.prepareStatement(sql);
+			
+			st.setInt(1, empDTO.getEmpno());
+			st.setString(2, empDTO.getEname());
+			st.setString(3, empDTO.getJob());
+			st.setInt(4, empDTO.getMgr());
+			st.setInt(5, empDTO.getSal());
+			st.setInt(6, empDTO.getComm());
+			st.setInt(7,empDTO.getDeptno());
+			
+			result = st.executeUpdate();
+			if(result > 0) {
+				System.out.println("성공");
+			}else {
+				System.out.println("실패");
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				st.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
 	//getSelectList
 		//전체사원정보 - 최신입사일순
-		public ArrayList<EmpDTO> getSelectList(){
+		public List<EmpDTO> getSelectList(){
 			Connection con = null;
 			PreparedStatement st= null;
 			ResultSet rs = null;
@@ -21,9 +98,8 @@ public class EmpDAO {
 			
 			try {
 				con = DBConnector.getConnect();
-				
-				String sql = "select empno, ename, job, mgr, hiredate, sal, nvl(comm, 0) comm, deptno "
-						+ "from emp order by hiredate desc";
+				//String sql = "select * from dept order by asc";
+				String sql = "select * from emp order by hiredate desc";
 				
 				st = con.prepareStatement(sql);
 				

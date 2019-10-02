@@ -1,6 +1,7 @@
 package com.pp.view;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.pp.emp.EmpDTO;
 
@@ -8,8 +9,9 @@ public class EmpView {
 	
 	
 		//모든 사원의 정보 출력
-		public void view(ArrayList<EmpDTO> ar) {
+		public void view(List<EmpDTO> ar) {
 			for(EmpDTO empDTO : ar) {
+				System.out.println("==========");
 				this.view(empDTO);
 			}
 		}

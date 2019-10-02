@@ -1,6 +1,7 @@
 package com.pp.control;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.pp.emp.EmpDAO;
@@ -21,20 +22,26 @@ public class EmpController {
 		EmpDAO emp = new EmpDAO();
 		EmpView ev = new EmpView();
 		EmpInput in = new EmpInput();
-		ArrayList<EmpDTO> ar = null;
+		
 		
 		while(check) {
-			System.out.println("1.사원 전체 정보");
-			System.out.println("2.사원 검색 출력");
-			System.out.println("3. 종료");
+			System.out.println("1. 사원 전체 정보");
+			System.out.println("2. 사원 검색 출력");
+			System.out.println("3. 사원 정보 추가");
+			System.out.println("4. 종료");
 			
 			int num = sc.nextInt();
 
 			
 			switch(num) {
 				case 1: 
-					ar = emp.getSelectList();
-					ev.view(ar);
+					List<EmpDTO> ar = emp.getSelectList();
+					if(ar.size()>0) {
+						ev.view(ar);
+						}else {
+							ev.view("데이터가 없습니다.");
+						}
+					
 					break;
 					
 				case 2:
@@ -44,12 +51,17 @@ public class EmpController {
 					if(e !=null) {
 						ev.view(e);
 					}else {
-						ev.view("없는 번호");
+						ev.view("없는 사원 번호입니다.");
 					}
 					break;
 				case 3:
-					check=false;
+					EmpDTO empDTO = in.insert();
+					num = emp.insert(empDTO);
+					
 					break;
+				default:				
+					check= !check;
+					
 			}
 			
 			
