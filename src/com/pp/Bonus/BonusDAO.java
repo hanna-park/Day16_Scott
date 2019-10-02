@@ -11,7 +11,7 @@ import com.pp.util.DBConnector;
 public class BonusDAO {
 	
 	//보너스 추가하기
-	public void bonInsert(BonusDTO bonusDTO) {
+	public int bonInsert(BonusDTO bonusDTO) {
 		Connection con = null;
 		PreparedStatement st = null;
 		int result = 0;
@@ -47,6 +47,7 @@ public class BonusDAO {
 			}
 			
 		}
+		return result;
 	}
 	
 	//보너스 전체 정보
@@ -104,7 +105,7 @@ public class BonusDAO {
 		try {
 			con = DBConnector.getConnect();
 			
-			String sql = "select * form emp where ename=?";
+			String sql = "select * from bonus where ename=?";
 			st = con.prepareStatement(sql);
 			
 			st.setString(1, ename);
@@ -139,7 +140,7 @@ public class BonusDAO {
 
 	//삭제
 	
-	public void bonDelete(BonusDTO bonusDTO) {
+	public BonusDTO bonDelete(BonusDTO bonusDTO) {
 		Connection con = null;
 		PreparedStatement st = null;
 		int result = 0;
@@ -173,6 +174,6 @@ public class BonusDAO {
 			
 		}
 		
-		
+		return bonusDTO;
 	}
 }

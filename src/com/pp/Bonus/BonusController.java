@@ -10,8 +10,8 @@ public class BonusController {
 		Scanner sc = new Scanner(System.in);
 		boolean check = true;
 		BonusDAO bonDAO = new BonusDAO();
-		BonusView bonv = new BonusView();
-		BonusInput bonin = new BonusInput();
+		BonusView bv = new BonusView();
+		BonusInput bi = new BonusInput();
 		
 		while(check) {
 			
@@ -27,21 +27,37 @@ public class BonusController {
 			
 			case 1 :
 				ArrayList<BonusDTO> ar = bonDAO.getSelectList();
-				
+				if(ar.size()>0) {
+					bv.view(ar);
+				}else {
+					System.out.println("데이터가 없습니다.");
+				}
 				break;
 			
 			case 2 :
 				
-				String name = bonin.bonnoInput();
-				BonusDTO bonusDTO = bonDAO.getselectOne(ename);
+				String ename = bi.bonnoInput();
+				BonusDTO bonDTO = bonDAO.getselectOne(ename);
+				if(bonDTO != null) {
+					bv.view(bonDTO);
+				}else {
+					System.out.println("없는 보너스입니다");
+				}
 				
 				break;
 			
 			case 3:
 				
+				BonusDTO bonDTO2 = bi.bonInsert();
+				num = bonDAO.bonInsert(bonDTO2);
+				
 				 break;
 			
 			case 4:
+				String str =bi.bonDelete();
+				BonusDTO bonDTO3 = bonDAO.getselectOne(str);
+						bonDTO3 = bonDAO.bonDelete(bonDTO3);
+				
 				break;
 				
 			default:

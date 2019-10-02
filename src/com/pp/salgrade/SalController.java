@@ -33,14 +33,17 @@ public class SalController {
 				break;
 			case 3:
 				
+				System.out.println("추가");
 				System.out.println("grade : ");
 				int grade=sc.nextInt();
-				
 				System.out.println("losal : ");
 				int losal=sc.nextInt();
 				System.out.println("hisal : ");
 				int hisal=sc.nextInt();
 				SalDTO sdto2=new SalDTO();
+				sdto2.setGrade(grade);
+				sdto2.setLosal(losal);
+				sdto2.setHisal(hisal);
 				result=sdao.insert(sdto2);
 				if(result>0) {
 					System.out.println("성공");
