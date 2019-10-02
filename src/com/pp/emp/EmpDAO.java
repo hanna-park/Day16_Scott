@@ -97,7 +97,7 @@ public class EmpDAO {
 			
 			String sql = "select * from emp where ename like '%"+str+"%'";
 			
-			st = con.prepareStatement(sql);
+			st = con.prepareStatement(sql.toUpperCase());
 			rs = st.executeQuery();
 			
 			while(rs.next()) {
